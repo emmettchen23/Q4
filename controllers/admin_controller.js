@@ -38,4 +38,19 @@ router.get('/userBreakdown', loggedIn, function(request, response) {
     });
 });
 
+router.post('/refreshTrans', loggedIn function(request, response){
+    //Admin.refreshTrans();
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.redirect('admin/transactionHistory');
+});
+
+router.post('/removeUser', loggedIn function(request, response){
+    let email = request.body.email;
+    //Admin.removeWeek(email);
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.redirect('admin/userBreakdown');
+});
+
 module.exports = router;

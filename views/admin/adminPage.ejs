@@ -1,3 +1,27 @@
 <%- include('../partials/header', {title:"Order Fulfillment", user:user}) -%>
+<br>
+<h1>Welcome, Admin</h1>
 
-<h1>history</h1>
+<h2>Navigation</h2>
+<a href="/transactionHistory"><button>View Transaction History</button></a>
+<a href="/userBreakdown"><button>View User Breakdown</button></a>
+
+<br>
+
+<h2>Actionables</h2>
+<h4>Refresh All Transaction Data</h4>
+
+<form action="/refreshTrans" method="POST">
+
+  <input type="submit" value="Refresh">
+
+</form>
+
+<h4>Remove a User</h4>
+<form action="/removeUser" method="POST">
+
+  <label for = "name">User Email:</label>
+  <input type = "text" id = "email" name= "email" value = ""><br>
+  <input type="submit" value="Refresh">
+
+</form>
