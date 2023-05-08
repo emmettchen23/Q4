@@ -1,7 +1,9 @@
 const express = require('express'),
   router = express.Router();
 
+
 const Student = require('../models/student_model');
+
 
 
 function loggedIn(request, response, next) {
@@ -48,14 +50,14 @@ router.get('/submitted', loggedIn, function(request, response) {
     });
 });
 
-router.post('/sellPost', loggedIn function(request, response){
+router.post('/sellPost', loggedIn, function(request, response){
     //Student.addSale();
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.redirect('/submitted');
 });
 
-router.post('/buy', loggedIn function(request, response){
+router.post('/buy', loggedIn, function(request, response){
     //Student.completeSale();
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
