@@ -1,3 +1,20 @@
 <%- include('../partials/header', {title:"Order Fulfillment", user:user}) -%>
 
-<h1>history</h1>
+<h1>Sell an Item</h1>
+
+<section style="background-color:#90b7bc;">
+<h2>  Details  </h2>
+<form action="/upload/photo" enctype="multipart/form-data" method="POST">
+  <label>Name:</label>
+  <input type = "text" name = "title" id = "name" maxlength = "30">
+  <br>
+  <label>Description (Max 250 Characters):</label>
+  <input type = "text" name = "title" id = "name" size = "50" maxlength = "250">
+  <br>
+  <label>Upload an Image:</label>
+  <input type="file" name="picture" accept="image/*" value = "Select">
+  <br>
+  <input type="submit" value="Post!" />
+</form>
+
+</section>
