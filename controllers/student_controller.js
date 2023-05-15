@@ -79,15 +79,20 @@ router.get('/market', loggedIn, function(request, response) {
 
 router.get('/profile', loggedIn, function(request, response) {
 
-  let studentsArray = Student.getStudents();
-    console.log(studentsArray);
+  Student.getStudents(function(rows){
+    console.log(rows);
+
+
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("student/profile",{
-      students: studentsArray,
+      students: rows,
       photoLocation: "/uploads/" + "image-1683491793468.jpeg",
       user:request.user
     });
+
+  });
+
 });
 
 router.get('/sell', loggedIn, function(request, response) {
