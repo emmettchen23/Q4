@@ -79,9 +79,12 @@ router.get('/market', loggedIn, function(request, response) {
 
 router.get('/profile', loggedIn, function(request, response) {
 
+  let studentsArray = Student.getStudents();
+    console.log(studentsArray);
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("student/profile",{
+      students: studentsArray,
       photoLocation: "/uploads/" + "image-1683491793468.jpeg",
       user:request.user
     });
