@@ -58,9 +58,8 @@ router.get('/auth/google/callback',
   }),
   function(request, response) {
 
-    console.log(userProfile);
     let a = request.user._json.email;
-    console.log("a");
+
     let b = a.split("");
     if(a == "justin.godhe@trinityschoolnyc.org"){
       response.redirect('admin/adminPage');

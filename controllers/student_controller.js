@@ -79,6 +79,41 @@ router.get('/market', loggedIn, function(request, response) {
 
 router.get('/profile', loggedIn, function(request, response) {
 
+  Student.getTransactions(function(rows){
+
+
+    let openT = [];
+    let closedT = [];
+    let boughtItems = [];
+    for(let i = 0; i < rows.length; i++){
+
+      if(rows[i]["userPostId"] == request.user._json.email && rows[i]["userBuyId"] == "n/a"){
+
+        openT.push(rows[i]);
+      }
+      if(rows[i]["userPostId"] == request.user._json.email && rows[i]["userBuyId"] != "n/a"){
+
+        closedT.push(rows[i]);
+      }
+      if(rows[i]["userBuyId"] == request.user._json.email){
+
+        boughtItems.push(rows[i]);
+      }
+    }
+
+
+
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.render("student/profile",{
+      openT: openT,
+      closedT: closedT,
+      boughtItems: boughtItems,
+      user:request.user
+    });
+
+  });
+/*
   Student.getStudents(function(rows){
     console.log(rows);
 
@@ -92,6 +127,7 @@ router.get('/profile', loggedIn, function(request, response) {
     });
 
   });
+  */
 
 });
 

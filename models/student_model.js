@@ -13,3 +13,13 @@ exports.getStudents = function(callback){
     }
   });
 }
+
+exports.getTransactions = function(callback){
+  db.all('SELECT * FROM transactions', function(err, rows){
+    if(err) {
+      return null;
+    } else {
+      callback(rows);
+    }
+  });
+}

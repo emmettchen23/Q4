@@ -1,7 +1,58 @@
 <%- include('../partials/header', {title:"Order Fulfillment", user:user}) -%>
 
-<h1>history</h1>
+<h1>Profile</h1>
 
-  <h1> Congrats! Your photo upload worked: </h1>
-  <p><%=JSON.stringify(students)%></p>
-  <img src='<%=photoLocation%>' width='50%'>
+<h3>Personal Details:</h3>
+  <p>Email: <%=user._json.email%></p>
+
+<br>
+<h3>Open Sales</h3>
+<table>
+  <tr>
+  <th>Title</th>
+  <th>Description</th>
+  </tr>
+  <%=JSON.stringify(openT)%>
+  <% for(let i = 0; i < openT.length; i++){ %>
+  <tr>
+    <td><%=openT[i]["title"]%></td>
+      <td><%=openT[i]["description"]%></td>
+    </tr>
+  <%}%>
+
+</table>
+  <br>
+  <h3>Closed Sales</h3>
+  <table>
+
+    <tr>
+    <th>Title</th>
+    <th>Description</th>
+    </tr>
+    <%=JSON.stringify(closedT)%>
+    <% for(let i = 0; i < closedT.length; i++){ %>
+    <tr>
+      <td><%=closedT[i]["title"]%></td>
+        <td><%=closedT[i]["description"]%></td>
+      </tr>
+    <%}%>
+
+</table>
+
+<br>
+<h3>Bought Items</h3>
+<table>
+
+  <tr>
+  <th>Title</th>
+  <th>Description</th>
+  </tr>
+  <%=JSON.stringify(boughtItems)%>
+  <% for(let i = 0; i < boughtItems.length; i++){ %>
+  <tr>
+    <td><%=boughtItems[i]["title"]%></td>
+      <td><%=boughtItems[i]["description"]%></td>
+    </tr>
+  <%}%>
+</table>
+<br>

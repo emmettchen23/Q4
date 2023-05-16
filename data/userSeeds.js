@@ -13,7 +13,7 @@ db.run("INSERT INTO students (email) VALUES (?)",
 );
 
 db.run("INSERT INTO transactions (userPostId, userBuyId, title, description) VALUES (?,?,?,?)",
-  'emmett.chen23@trinityschoolnyc.org', "justingodhe@trinityschoolnyc.org", "hoodie", "grey hoodie",
+  'emmett.chen23@trinityschoolnyc.org', "n/a", "hoodienew", "grey hoodie",
   function(err) {
     if (err) { throw err;}
   }
