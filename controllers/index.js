@@ -24,6 +24,7 @@ router.get('/login', function(request, response) {
 });
 
 router.get('/error', function(request, response) {
+  console.log("reached")
   const errorCode = request.query.code;
   if (!errorCode) errorCode = 400;
   const errors = {

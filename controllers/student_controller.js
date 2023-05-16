@@ -16,18 +16,6 @@ app.use(express.static('public'));
 app.set('views', __dirname + '/views'); //specify location of templates
 app.set('view engine', 'ejs'); //specify templating library
 
-// SET STORAGE
-let privateStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads')
-  },
-  filename: function (req, file, cb) {
-    console.log(file)
-    cb(null, Date.now()+'-'+file.originalname.replace(' ', '-'));
-  }
-});
-let privateUpload = multer({ storage: privateStorage });
-
 let publicStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/uploads')
@@ -45,6 +33,7 @@ let publicUpload = multer({ storage: publicStorage });
 //Uploading to a public static folder
 app.post('/upload/photo', publicUpload.single('picture'), (req, res, next) => {
   const file = req.file;
+  console.log(file);
   if (!file) {
     const error = {
     'httpStatusCode' : 400,

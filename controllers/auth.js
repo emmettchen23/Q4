@@ -64,11 +64,7 @@ router.get('/auth/google/callback',
     if(a == "justin.godhe@trinityschoolnyc.org"){
       response.redirect('admin/adminPage');
     }
-    for(let i = 0; i< b.length; i++){
-      if(b[i] == "1" || b[i] == "2" || b[i] == "3" || b[i] == "4" || b[i] == "5" || b[i] == "6" || b[i] == "7" || b[i] == "8" || b[i] == "9"){
-        response.redirect('/profile')
-      }
-    }
+  
     response.redirect('/profile');
   });
 
