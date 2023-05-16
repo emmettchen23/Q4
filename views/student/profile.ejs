@@ -44,14 +44,20 @@
 <table>
 
   <tr>
+  <th>Seller</th>
   <th>Title</th>
   <th>Description</th>
+  <th>image</th>
+
   </tr>
   <%=JSON.stringify(boughtItems)%>
   <% for(let i = 0; i < boughtItems.length; i++){ %>
+
   <tr>
+    <td><%=boughtItems[i]["userPostId"]%></td>
     <td><%=boughtItems[i]["title"]%></td>
       <td><%=boughtItems[i]["description"]%></td>
+        <td><img src='<%=boughtItems[i]["imageSRC"]%>' width='50%'></td>
     </tr>
   <%}%>
 </table>

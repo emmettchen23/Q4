@@ -8,7 +8,8 @@ CREATE TABLE transactions (
   userPostId INTEGER,
   userBuyId INTEGER,
   title TEXT,
-  description TEXT
+  description TEXT,
+  imageSRC TEXT
 
 
 );

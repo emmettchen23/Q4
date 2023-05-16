@@ -19,7 +19,7 @@ app.set('view engine', 'ejs'); //specify templating library
 // SET STORAGE
 let privateStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads')
+    cb(null, './public/uploads')
   },
   filename: function (req, file, cb) {
     console.log(file)
@@ -30,7 +30,7 @@ let privateUpload = multer({ storage: privateStorage });
 
 let publicStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/images')
+    cb(null, './public/uploads')
   },
   filename: function (req, file, cb) {
     console.log(file)
@@ -53,9 +53,9 @@ app.post('/upload/photo', publicUpload.single('picture'), (req, res, next) => {
     res.send(error);
   }
 
-  res.render('student/profile',{
-    user: request.user,
-    photoLocation: "/uploads/"+file.filename
+  res.render('student/market',{
+    user: request.user
+    //photoLocation: "/uploads/"+file.filename
   });
 })
 
