@@ -23,3 +23,12 @@ exports.getTransactions = function(callback){
     }
   });
 }
+
+exports.addTran = function(name,des){
+  db.run("INSERT INTO transactions (userPostId, userBuyId, title, description) VALUES (?,?,?,?)",
+    'emmett.chen23@trinityschoolnyc.org', "nancy.chen23@trinityschoolnyc.org", name, des,
+    function(err) {
+      if (err) { throw err;}
+    }
+  );
+}

@@ -1,20 +1,10 @@
 const multer = require('multer');
 //const express = require('express');
 const ejs = require('ejs');
-const fs = require('fs');
 const express = require('express'),
   router = express.Router();
 
-
 const Student = require('../models/student_model');
-
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
-
-app.use(express.static('public'));
-app.set('views', __dirname + '/views'); //specify location of templates
-app.set('view engine', 'ejs'); //specify templating library
 
 let publicStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,13 +15,15 @@ let publicStorage = multer.diskStorage({
     cb(null, Date.now()+'-'+file.originalname.replace(' ', '-'));
   }
 });
+
 let publicUpload = multer({ storage: publicStorage });
 
 
 
 
 //Uploading to a public static folder
-app.post('/upload/photo', publicUpload.single('picture'), (req, res, next) => {
+router.post('/upload/photo', publicUpload.single('picture'), (req, res, next) => {
+
   const file = req.file;
   console.log(file);
   if (!file) {
@@ -41,9 +33,13 @@ app.post('/upload/photo', publicUpload.single('picture'), (req, res, next) => {
      }
     res.send(error);
   }
+  let name = req.body.name;
+  let des = req.body.des;
+
+  Student.addTran(name,des);
 
   res.render('student/market',{
-    user: request.user
+    user: req.user
     //photoLocation: "/uploads/"+file.filename
   });
 })

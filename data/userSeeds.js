@@ -12,8 +12,8 @@ db.run("INSERT INTO students (email) VALUES (?)",
   }
 );
 
-db.run("INSERT INTO transactions (userPostId, userBuyId, title, description, imageSRC) VALUES (?,?,?,?,?)",
-  '23@trinityschoolnyc.org', "emmett.chen23@trinityschoolnyc.org", "hoodienew2", "grey hoodie", "/uploads/image-1683491793468.jpeg",
+db.run("INSERT INTO transactions (userPostId, userBuyId, title, description) VALUES (?,?,?,?,?)",
+  'emmett.chen23@trinityschoolnyc.org', "nancy.chen23@trinityschoolnyc.org", "hoodienew2", "grey hoodie",
   function(err) {
     if (err) { throw err;}
   }
