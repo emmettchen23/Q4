@@ -5,8 +5,8 @@ DROP TABLE IF EXISTS transactions;
 
 CREATE TABLE transactions (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  userPostId INTEGER,
-  userBuyId INTEGER,
+  userPostId TEXT,
+  userBuyId TEXT,
   title TEXT,
   description TEXT,
   imageSRC TEXT
