@@ -32,3 +32,13 @@ exports.getTransactions = function(callback){
     }
   });
 }
+
+exports.getUsers = function(callback){
+  db.all('SELECT * FROM users', function(err, rows){
+    if(err) {
+      return null;
+    } else {
+      callback(rows);
+    }
+  });
+}

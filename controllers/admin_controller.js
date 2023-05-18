@@ -46,10 +46,16 @@ router.get('/transactionHistory', loggedIn, function(request, response) {
 
 router.get('/userBreakdown', loggedIn, function(request, response) {
 
+  Admin.getUsers(function(rows){
+
+
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("admin/userBreakdown",{
+      userRows: rows,
       user:request.user
+    });
+
     });
 });
 
