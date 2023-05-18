@@ -5,6 +5,7 @@ const express = require('express'),
   router = express.Router();
 
 const Student = require('../models/student_model');
+const User = require('../models/user_model');
 
 let publicStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -151,6 +152,17 @@ router.get('/submitted', loggedIn, function(request, response) {
     response.setHeader('Content-Type', 'text/html')
     response.render("student/submitted",{
       user:request.user
+    });
+});
+
+router.get('/forum', loggedIn, function(request, response) {
+
+    let user = User.getUser(request.user._json.email);
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html')
+    response.render("student/forum", {
+      userFirstName: user.firstName,
+      user: request.user
     });
 });
 
