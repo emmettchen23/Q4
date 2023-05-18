@@ -35,10 +35,12 @@ router.post('/upload/photo', publicUpload.single('picture'), (req, res, next) =>
   }
   let name = req.body.name;
   let des = req.body.des;
+  let imageSRC = "/uploads/"+file.filename;
+  let user = req.user._json.email;
 
-  Student.addTran(name,des);
+  Student.addTran(user, name, des, imageSRC);
 
-  res.render('student/market',{
+  res.render('student/profile',{
     user: req.user
     //photoLocation: "/uploads/"+file.filename
   });
@@ -55,11 +57,27 @@ function loggedIn(request, response, next) {
 
 router.get('/market', loggedIn, function(request, response) {
 
+  Student.getTransactions(function(rows){
+
+    let openT = [];
+
+    for(let i = 0; i < rows.length; i++){
+
+      if(rows[i]["userBuyId"] == "n/a"){
+
+        openT.push(rows[i]);
+
+      }
+    }
+
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("student/market",{
+      openT: openT,
       user:request.user
     });
+
+  });
 });
 
 router.get('/profile', loggedIn, function(request, response) {
@@ -75,6 +93,7 @@ router.get('/profile', loggedIn, function(request, response) {
       if(rows[i]["userPostId"] == request.user._json.email && rows[i]["userBuyId"] == "n/a"){
 
         openT.push(rows[i]);
+
       }
       if(rows[i]["userPostId"] == request.user._json.email && rows[i]["userBuyId"] != "n/a"){
 
@@ -142,7 +161,27 @@ router.post('/sellPost', loggedIn, function(request, response){
 });
 
 router.post('/buy', loggedIn, function(request, response){
-    //Student.completeSale();
+
+    let id = request.body.id;
+    console.log(id);
+
+    let imageSRC = request.body.imageSRC;
+    let userBuyId = request.user._json.email;
+    let userPostId = request.body.userPostId;
+    let title = request.body.title[0];
+    let description = request.body.description;
+    console.log(title);
+    console.log("title");
+
+  Student.completeSale(userPostId, userBuyId, title, description, imageSRC);
+/*
+    Student.completeSale(imageSRC, userBuyId, function(err) {
+      if(err) {
+        console.error(err);
+        return;
+      }
+    });
+*/
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.redirect('/submitted');

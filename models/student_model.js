@@ -24,11 +24,37 @@ exports.getTransactions = function(callback){
   });
 }
 
-exports.addTran = function(name,des){
-  db.run("INSERT INTO transactions (userPostId, userBuyId, title, description) VALUES (?,?,?,?)",
-    'emmett.chen23@trinityschoolnyc.org', "nancy.chen23@trinityschoolnyc.org", name, des,
+exports.addTran = function(user, name, des, imageSRC){
+  db.run("INSERT INTO transactions (userPostId, userBuyId, title, description, imageSRC) VALUES (?,?,?,?,?)",
+    user, "n/a", name, des, imageSRC,
     function(err) {
       if (err) { throw err;}
     }
   );
+}
+
+exports.completeSale = function(userPostId, userBuyId, title, description, imageSRC) {
+
+  db.run("DELETE FROM transactions WHERE imageSRC=?", [imageSRC], function(err){
+    if(err){
+      throw err
+    }
+  });
+
+  db.run("INSERT INTO transactions (userPostId, userBuyId, title, description, imageSRC) VALUES (?,?,?,?,?)",
+[userPostId, userBuyId, title, description, imageSRC],
+    function(err) {
+      if (err) { throw err;}
+    }
+  );
+  /*
+  const sql = 'UPDATE transactions SET userBuyId = ? WHERE imageSRC = ?';
+
+  db.run(sql, [userBuyId, imageSRC], function(err) {
+    if(err) {
+      return callback(err);
+    }
+    callback(null);
+  });
+  */
 }

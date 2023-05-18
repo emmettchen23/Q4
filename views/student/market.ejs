@@ -1,3 +1,37 @@
 <%- include('../partials/header', {title:"Order Fulfillment", user:user}) -%>
 
 <h1>Market</h1>
+
+<table>
+  <tr>
+    <th>buy</th>
+    <th>Seller</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Image</th>
+    <th></th>
+  </tr>
+  <%=JSON.stringify(openT)%>
+  <% for(let i = 0; i < openT.length; i++){ %>
+  <form action="/buy" method="POST">
+    <input type="hidden" name="openTlen" value="<%= openT.length %>">
+  <tr>
+    <td><%=openT[i]["userBuyId"]%></td>
+    <td><%=openT[i]["userPostId"]%></td>
+    <td><%=openT[i]["title"]%></td>
+      <td><%=openT[i]["description"]%></td>
+      <td><img src='<%=openT[i]["imageSRC"]%>' width='50%'></td>
+
+      <input type="hidden" name="id" value="<%= i %>">
+      <input type="hidden" name="userPostId" value="<%= openT[i]["userPostId"] %>">
+      <input type="hidden" name="description" value="<%= openT[i]["description"] %>">
+      <input type="hidden" name="title" value="<%= openT[i]["title"] %>">
+    <input type="hidden" name="imageSRC" value="<%= openT[i]["imageSRC"] %>">
+      <td><input type="submit" value="Thrift"></td>
+
+    </tr>
+    </form>
+  <%}%>
+
+
+</table>

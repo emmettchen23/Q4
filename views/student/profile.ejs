@@ -11,12 +11,14 @@
   <tr>
   <th>Title</th>
   <th>Description</th>
+  <th>Image</th>
   </tr>
   <%=JSON.stringify(openT)%>
   <% for(let i = 0; i < openT.length; i++){ %>
   <tr>
     <td><%=openT[i]["title"]%></td>
       <td><%=openT[i]["description"]%></td>
+      <td><img src='<%=openT[i]["imageSRC"]%>' width='50%'></td>
     </tr>
   <%}%>
 
@@ -34,6 +36,7 @@
     <tr>
       <td><%=closedT[i]["title"]%></td>
         <td><%=closedT[i]["description"]%></td>
+        <td><img src='<%=closedT[i]["imageSRC"]%>' width='50%'></td>
       </tr>
     <%}%>
 
