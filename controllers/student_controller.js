@@ -40,8 +40,9 @@ router.post('/upload/photo', publicUpload.single('picture'), (req, res, next) =>
 
   Student.addTran(user, name, des, imageSRC);
 
-  res.render('student/profile',{
-    user: req.user
+  res.render('student/submitted',{
+    user: req.user,
+    imageSRC: imageSRC
     //photoLocation: "/uploads/"+file.filename
   });
 })
@@ -184,7 +185,10 @@ router.post('/buy', loggedIn, function(request, response){
 */
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.redirect('/submitted');
+    response.render('student/submitted',{
+      user:request.user,
+      imageSRC: imageSRC
+    });
 });
 
 
