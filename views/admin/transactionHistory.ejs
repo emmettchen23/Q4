@@ -1,19 +1,25 @@
 <%- include('../partials/header', {title:"Transaction History", user:user}) -%>
 <br>
 <h1>Transaction Log</h1>
+
 <table>
+
   <tr>
     <th>Seller</th>
-    <th>Buyer</th>
-    <th>Title</th>
-    <th>Decription</th>
-    <th>Image</th>
+  <th>Buyer</th>
+  <th>Title</th>
+  <th>Description</th>
+  <th>Image</th>
   </tr>
+  <%=JSON.stringify(closedT)%>
+  <% for(let i = 0; i < closedT.length; i++){ %>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+    <td><%=closedT[i]["userPostId"]%></td>
+    <td><%=closedT[i]["userBuyId"]%></td>
+    <td><%=closedT[i]["title"]%></td>
+      <td><%=closedT[i]["description"]%></td>
+      <td><img src='<%=closedT[i]["imageSRC"]%>' width='50%'></td>
+    </tr>
+  <%}%>
+
 </table>

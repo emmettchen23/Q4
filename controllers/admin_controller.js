@@ -22,10 +22,25 @@ router.get('/adminPage', loggedIn, function(request, response) {
 
 router.get('/transactionHistory', loggedIn, function(request, response) {
 
+  Admin.getTransactions(function(rows){
+
+
+    let closedT = [];
+    for(let i = 0; i < rows.length; i++){
+      if(rows[i]["userBuyId"] != "n/a"){
+
+        closedT.push(rows[i]);
+      }
+    }
+    console.log(closedT);
+
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("admin/transactionHistory",{
+      closedT: closedT,
       user:request.user
+    });
+
     });
 });
 
@@ -39,7 +54,7 @@ router.get('/userBreakdown', loggedIn, function(request, response) {
 });
 
 router.post('/refreshTrans', loggedIn, function(request, response){
-    //Admin.refreshTrans();
+    Admin.refreshTrans();
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.redirect('/transactionHistory');
@@ -47,7 +62,7 @@ router.post('/refreshTrans', loggedIn, function(request, response){
 
 router.post('/removeUser', loggedIn, function(request, response){
     let email = request.body.email;
-    //Admin.removeWeek(email);
+    Admin.removeUser(email);
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.redirect('/userBreakdown');
