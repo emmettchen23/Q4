@@ -10,7 +10,6 @@
     <th>Image</th>
     <th></th>
   </tr>
-  <%=JSON.stringify(openT)%>
   <% for(let i = 0; i < openT.length; i++){ %>
   <form action="/buy" method="POST">
     <input type="hidden" name="openTlen" value="<%= openT.length %>">
