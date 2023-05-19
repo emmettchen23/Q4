@@ -157,11 +157,10 @@ router.get('/submitted', loggedIn, function(request, response) {
 
 router.get('/forum', loggedIn, function(request, response) {
 
-    let user = User.getUser(request.user._json.email);
+    //let user = User.getUser(request.user._json.email);
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
     response.render("student/forum", {
-      userFirstName: user.firstName,
       user: request.user
     });
 });

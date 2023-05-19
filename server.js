@@ -1,38 +1,38 @@
-
-//..............Include Express..................................//
+// Import necessary libraries
 const express = require('express');
 const ejs = require('ejs');
-//..............Create an Express server object..................//
+const http = require('http');
+const setupSocketIO = require('./controllers/socketConnections'); // rename to reflect that it's a function
+
+// Create an Express app
 const app = express();
-let server = require('http').Server(app);
-let io = require('socket.io')(server);
 
-//..............Apply Express middleware to the server object....//
-app.use(express.json()); //Used to parse JSON bodies (needed for POST requests)
-app.use(express.urlencoded());
-app.use(express.static('public')); //specify location of static assests
-app.set('views', __dirname + '/views'); //specify location of templates
-app.set('view engine', 'ejs'); //specify templating library
+// Create an HTTP server and attach Express app to it
+const server = http.createServer(app);
 
+// Attach socket.io to the HTTP server
+const io = setupSocketIO(server); // use the function here
+
+// Apply Express middleware to the app
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+// Use route controllers
 app.use(require('./controllers/auth'));
-
 app.use(require('./controllers/admin_controller'));
 app.use(require('./controllers/student_controller'));
-
 app.use(require('./controllers/index'));
 
-
-
+// Default route for unhandled requests
 app.use("", function(request, response) {
   response.redirect('/error?code=400');
 });
 
-
-let socketapi =require('./controllers/socketConnections');
-socketapi.io.attach(server);//attach sockets to the server
-
-//..............Start the server...............................//
+// Start the HTTP server
 const port = process.env.PORT || 3000;
-app.listen(port, function() {
-  console.log('Server started at http://localhost:'+port+'.')
+server.listen(port, function() {
+  console.log('Server started at http://localhost:' + port);
 });

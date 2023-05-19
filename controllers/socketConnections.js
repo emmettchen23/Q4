@@ -1,27 +1,19 @@
-const io = require( "socket.io" )();
-const socketapi = {
-    io: io
+const socketIO = require('socket.io');
+
+module.exports = function (server) {
+  const io = socketIO(server);
+
+  io.on('connection', function (socket) {
+    console.log('A user connected: ' + socket.id);
+
+    socket.on('message', function (data) {
+      io.emit('message', data);
+    });
+
+    socket.on('disconnect', function () {
+      console.log('A user disconnected: ' + socket.id);
+    });
+  });
+
+  return io;
 };
-
-io.on('connection', function(socket){
-  
-    socket.on('announcement', function(data) {
-      console.log('announcement:', data);
-      io.emit('announcement', {
-        userFirstName: data.userFirstName,
-        message: data.message
-      });
-    });
-
-    socket.on('connectionEvent', function(data) {
-      console.log('connection:', data.userFirstName);
-      io.emit('connectionEvent', {
-          userFirstName:data.userFirstName,
-          numClients: io.engine.clientsCount,
-          message: 'connected'
-      });
-    });
-
-});
-
-module.exports = socketapi;
